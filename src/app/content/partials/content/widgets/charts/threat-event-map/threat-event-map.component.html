@@ -1,0 +1,21 @@
+<mgl-map
+    [style]="'mapbox://styles/mapbox/satellite-streets-v9'"
+    [zoom]="[15]"
+    [center]="[centerLON, centerLAT]"
+  >
+  <mgl-geojson-source
+      id="trace"
+      [data]="geoJson"
+    >
+    </mgl-geojson-source>
+    <mgl-layer
+      id="trace"
+      type="line"
+      source="trace"
+      [paint]="{
+        'line-color': ['get', 'color'],
+        'line-width': 5
+      }"
+    >
+    </mgl-layer>
+</mgl-map>

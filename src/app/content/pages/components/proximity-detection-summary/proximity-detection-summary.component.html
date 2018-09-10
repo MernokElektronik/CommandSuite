@@ -1,0 +1,114 @@
+<div class="m-subheader">
+	<div class="d-flex align-items-center">
+		<div class="mr-auto">
+			<h3 class="m-subheader__title"> Proximity Detection Summary Report </h3>
+			<!---->
+		</div>
+	</div>
+</div>
+
+<ng-container mPortletBody>
+		<div class="m-portlet m-portlet--bordered m-portlet--unair">
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">
+							Parameters
+						</h3>
+					</div>
+				</div>
+			</div>
+			<div class="m-portlet__body">
+				<mat-grid-list cols="2" rowHeight="35px" class="params">
+					<mat-grid-tile class="param_header">
+						Detection Unit
+					</mat-grid-tile>
+					<mat-grid-tile class="param_header">
+						Detected Threat Unit
+					</mat-grid-tile>
+					<mat-grid-tile>
+						<div class="m-stack m-stack--ver m-stack--general param_header">
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+								UID
+							</div>
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+								VID
+							</div>
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+								Type
+							</div>
+						</div>
+					</mat-grid-tile>
+					<mat-grid-tile>
+						<div class="m-stack m-stack--ver m-stack--general param_header">
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+								UID
+							</div>
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+								VID
+							</div>
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+								Type
+							</div>
+						</div>
+					</mat-grid-tile>
+					<mat-grid-tile>
+						<div class="m-stack m-stack--ver m-stack--general params">
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+								{{Parameters.Unit.UID}}
+							</div>
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+					{{Parameters.Unit.VID}}
+							</div>
+							<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+					{{Parameters.Unit.Type}}
+							</div>
+						</div>
+					</mat-grid-tile>
+					<mat-grid-tile>
+				<div class="m-stack m-stack--ver m-stack--general params">
+					<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+					  {{Parameters.Threat.UID}}
+					</div>
+					<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+						{{Parameters.Threat.VID}}
+					</div>
+					<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+						{{Parameters.Threat.Type}}
+					</div>
+				  </div>
+					</mat-grid-tile>
+					<mat-grid-tile class="param_header">
+						Minimum Speed: {{Parameters.Unit.Speed}}
+					</mat-grid-tile>
+					<mat-grid-tile class="param_header">
+						Minimum Speed: {{Parameters.Threat.Speed}}
+					</mat-grid-tile>
+				</mat-grid-list>
+			</div>
+		</div>
+	</ng-container>
+
+<ng-container mPortletBody>
+	<div class="m-portlet m-portlet--bordered m-portlet--unair">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						Threat Zone Plot
+						<small>Select a segment or the center for a Detailed Proximity Detection Report</small>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="m-portlet__body">
+			<m-radar-sunburst-chart (click)="sectionClick($event)" [opacity]="opacityData" [labels]="labelData"></m-radar-sunburst-chart>
+		</div>
+	</div>
+</ng-container>
+<!--<select (change)="changeEvent($event.target.value)">
+        <option *ngFor="let testDatad of testData; let i = index" [value]="i">
+            {{testDatad.name}}
+        </option>
+</select>-->
+<!--<m-threat-event-map [data]="testData" [index]="eventId"></m-threat-event-map>-->

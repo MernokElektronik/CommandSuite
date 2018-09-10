@@ -1,0 +1,201 @@
+<div class="m-subheader">
+	<div class="d-flex align-items-center">
+		<div class="mr-auto">
+			<h3 class="m-subheader__title"> Proximity Detection Detailed Report </h3>
+			<!---->
+		</div>
+	</div>
+</div>
+
+
+
+<ng-container mPortletBody>
+	<div class="m-portlet m-portlet--bordered m-portlet--unair">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						Parameters
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="m-portlet__body">
+			<mat-grid-list cols="2" rowHeight="35px" class="params">
+				<mat-grid-tile class="param_header">
+					Detection Unit
+				</mat-grid-tile>
+				<mat-grid-tile class="param_header">
+					Detected Threat Unit
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<div class="m-stack m-stack--ver m-stack--general param_header">
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							UID
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							VID
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							Type
+						</div>
+					</div>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<div class="m-stack m-stack--ver m-stack--general param_header">
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							UID
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							VID
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							Type
+						</div>
+					</div>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<div class="m-stack m-stack--ver m-stack--general params">
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							{{Parameters.Unit.UID}}
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							{{Parameters.Unit.VID}}
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							{{Parameters.Unit.Type}}
+						</div>
+					</div>
+				</mat-grid-tile>
+				<mat-grid-tile>
+					<div class="m-stack m-stack--ver m-stack--general params">
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							{{Parameters.Threat.UID}}
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							{{Parameters.Threat.VID}}
+						</div>
+						<div class="m-stack__item m-stack__item--center m-stack__item--middle">
+							{{Parameters.Threat.Type}}
+						</div>
+					</div>
+				</mat-grid-tile>
+				<mat-grid-tile class="param_header">
+					Minimum Speed: {{Parameters.Unit.Speed}}
+				</mat-grid-tile>
+				<mat-grid-tile class="param_header">
+					Minimum Speed: {{Parameters.Threat.Speed}}
+				</mat-grid-tile>
+			</mat-grid-list>
+		</div>
+	</div>
+</ng-container>
+
+<ng-container mPortletBody>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="m-portlet m-portlet--bordered m-portlet--unair">
+				<div class="m-portlet__head">
+					<div class="m-portlet__head-caption">
+						<div class="m-portlet__head-title">
+							<h3 class="m-portlet__head-text">
+								Threat Zone Plot
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="m-portlet__body" style="height: 430.75px;">
+					<m-radar-sunburst-chart [opacity]="opacityData" [labels]="labelData"></m-radar-sunburst-chart>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="m-portlet m-portlet--bordered m-portlet--unair">
+				<div class="m-portlet__head">
+					<div class="m-portlet__head-caption">
+						<div class="m-portlet__head-title">
+							<h3 class="m-portlet__head-text">
+								Total Threat Breakdown
+							</h3>
+						</div>
+					</div>
+				</div>
+				<div class="m-portlet__body" style="height: 430.75px;">
+					<m-doughnut-chart [doughnutChartData]="dougnutValues" [doughnutChartColors]="doughnutColors" [doughnutChartLabels]="dougnutLabels"></m-doughnut-chart>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-container>
+
+<div class="m-portlet m-portlet--bordered m-portlet--unair">
+	<div class="table-portlet">
+		<table mat-table [dataSource]="testData2">
+			<ng-container matColumnDef="time">
+				<th mat-header-cell *matHeaderCellDef> Time </th>
+				<td mat-cell *matCellDef="let element"> {{element.getDate().toLocaleString()}} </td>
+			</ng-container>
+			<ng-container matColumnDef="VID">
+				<th mat-header-cell *matHeaderCellDef> VID </th>
+				<td mat-cell *matCellDef="let element"> {{element.unit.VID}} </td>
+			</ng-container>
+			<ng-container matColumnDef="sector">
+				<th mat-header-cell *matHeaderCellDef> Sector </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_Sector}} </td>
+			</ng-container>
+			<ng-container matColumnDef="zone">
+				<th mat-header-cell *matHeaderCellDef> Zone </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_Zone}} </td>
+			</ng-container>
+			<ng-container matColumnDef="distance">
+				<th mat-header-cell *matHeaderCellDef> Distance </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_Distance}} </td>
+			</ng-container>
+			<ng-container matColumnDef="UID">
+				<th mat-header-cell *matHeaderCellDef> UID </th>
+				<td mat-cell *matCellDef="let element"> {{element.unit.UID}} </td>
+			</ng-container>
+			<ng-container matColumnDef="Type">
+				<th mat-header-cell *matHeaderCellDef> Type </th>
+				<td mat-cell *matCellDef="let element"> {{element.unit.Type}} </td>
+			</ng-container>
+			<ng-container matColumnDef="Direction">
+				<th mat-header-cell *matHeaderCellDef> Direction </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Heading/100}} </td>
+			</ng-container>
+			<ng-container matColumnDef="Speed">
+				<th mat-header-cell *matHeaderCellDef> Speed </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Speed/10}} </td>
+			</ng-container>
+			<ng-container matColumnDef="tUID">
+				<th mat-header-cell *matHeaderCellDef> Threat BID </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_BID}} </td>
+			</ng-container>
+			<ng-container matColumnDef="tVID">
+				<th mat-header-cell *matHeaderCellDef> Threat VID </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_BID}} </td>
+			</ng-container>
+			<ng-container matColumnDef="tType">
+				<th mat-header-cell *matHeaderCellDef> Threat Type </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_Kind}} </td>
+			</ng-container>
+			<ng-container matColumnDef="tDirection">
+				<th mat-header-cell *matHeaderCellDef> Threat Direction </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_Direction}} </td>
+			</ng-container>
+			<ng-container matColumnDef="tSpeed">
+				<th mat-header-cell *matHeaderCellDef> Threat Speed </th>
+				<td mat-cell *matCellDef="let element"> {{element.points[0].Threat_Speed/10}} </td>
+			</ng-container>
+			<ng-container matColumnDef="Map">
+					<th mat-header-cell *matHeaderCellDef> Map </th>
+					<td mat-cell *matCellDef="let element"> 
+						<button mat-icon-button (click)="mapIconClicked(element.unit.UID,element.points[0].Threat_BID,element.timestamp)">
+							<mat-icon aria-label="Map">map</mat-icon>
+						  </button> </td>
+			</ng-container>
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+		</table>
+	</div>
+</div>

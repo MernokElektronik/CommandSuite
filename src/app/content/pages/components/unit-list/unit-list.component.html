@@ -1,0 +1,55 @@
+<div *ngFor="let unit of testData">
+
+
+	<div class="m-portlet">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						{{unit.unit.Name}}
+					</h3>
+				</div>
+			</div>
+		</div>
+		<div class="m-portlet__body  m-portlet__body--no-padding">
+			<div class="row m-row--no-padding m-row--col-separator-xl">
+				<div class="col-xl-4">
+					<mat-list>
+						<mat-list-item class="unitList">
+							<p class="heading">UID:</p> <p>{{unit.unit.UID}}</p>
+						</mat-list-item>
+						<mat-list-item class="unitList">
+							<p class="heading">VID:</p> <p>{{unit.unit.VID}}</p>
+						</mat-list-item>
+						<mat-list-item class="unitList">
+							<p class="heading">System Type:</p> <p>{{unit.unit.SystemType}}</p>
+						</mat-list-item>
+						<mat-list-item class="unitList">
+							<p class="heading">Type:</p> <p>{{unit.unit.Type}}</p>
+						</mat-list-item>
+						<mat-list-item class="unitList">
+							<p class="heading">Group:</p> <p>{{unit.unit.Group}}</p>
+						</mat-list-item>
+						<mat-list-item class="unitList">
+							<p class="heading">Site:</p> <p>{{unit.unit.Site}}</p>
+						</mat-list-item>
+						<mat-list-item class="unitList">
+							<p class="heading">Area:</p> <p>{{unit.unit.Area}}</p>
+						</mat-list-item>
+						<mat-list-item class="unitList">
+							<p class="heading">Firmware Version:</p> <p>{{unit.unit.FirmwareVer}}</p>
+						</mat-list-item>
+						<mat-divider></mat-divider>
+					</mat-list>
+				</div>
+				<div class="col-xl-4" style="min-width: 250px;">
+					<m-radar-sunburst-chart [labels]="unit.getSunBurstData().label" [opacity]="unit.getSunBurstData().opacity" sizeWidth="250" sizeHeight="250"></m-radar-sunburst-chart>
+				</div>
+				<div class="col-xl-4">
+            <button type="button" class="btn m-btn--square  btn-primary btn-lg" (click)="ProximityDetectionSummary(unit.unit.UID)">Proximity Detection Summary</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
